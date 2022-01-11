@@ -1,4 +1,4 @@
-import { Controller, Get, Put } from "@nestjs/common";
+import { Controller, Get } from "@nestjs/common";
 
 @Controller("teacher")
 export class TeacherController {
