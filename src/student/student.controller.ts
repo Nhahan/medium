@@ -16,4 +16,9 @@ export class StudentController {
     createStudent() {
         return "Create Student";
     }
+
+    @Put("/:studentId")
+    updateStudent() {
+        return "Update Student By Id";
+    }
 }
