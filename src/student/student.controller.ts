@@ -8,8 +8,8 @@ export class StudentController {
     }
 
     @Get("/:studentId")
-    getStudentById(@Param() studentId: string) {
-        return `Get Student With Id of ${studentId}"`;
+    getStudentById(@Param("studentId") studentId: string) {
+        return `Get Student With Id of ${studentId}`;
     }
 
     @Post()
@@ -18,7 +18,9 @@ export class StudentController {
     }
 
     @Put("/:studentId")
-    updateStudent() {
-        return "Update Student By Id";
+    updateStudent(@Param("studentId") studentId: string) {
+        return `Update Student With The Following Data ${JSON.stringify(
+            body,
+        )} and ${studentId}`;
     }
 }
