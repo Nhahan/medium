@@ -1,2 +1,4 @@
-@Module(metadata)
+import { Module } from '@nestjs/common';
+
+@Module({})
 export class TagModule {}
