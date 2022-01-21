@@ -5,7 +5,7 @@ const config: ConnectionOptions = {
     host: "localhost",
     port: 5432,
     username: "mediumclone",
-    password: "",
+    password: "1234",
     database: "mediumclone",
 };
 
