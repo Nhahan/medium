@@ -6,7 +6,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import ormconfig from "./ormconfig";
 
 @Module({
-  imports: [TypeOrmModule.forRoot(ormconfig), TagModule], // forRoot: import from not our project but from library
+  imports: [TypeOrmModule.forRoot(ormconfig), TagModule],
+  // forRoot: import from not our project but from library
   controllers: [AppController],
   providers: [AppService],
 })
