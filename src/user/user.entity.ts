@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'user' })
 export class UserEntity {
@@ -8,6 +8,17 @@ export class UserEntity {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ default: '' })
   bio: string;
+
+  @Column({ default: '' })
+  image: string;
+
+  @Column()
+  password: string;
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = '';
+  }
 }
