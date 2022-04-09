@@ -10,17 +10,7 @@ export class UserController {
   async createUser(
     @Body('user') createUserDto: CreateUserDto,
   ): Promise<UserEntity> {
-    return this.userService.createUser(createUserDto);
-  }
-
-  generateJwt(user: UserEntity): string {}
-
-  buildUserResponse(user: UserEntity): any {
-    return {
-      user: {
-        ...user,
-        token: this.generateJwt(user),
-      },
-    };
+    const user = await this.userService.createUser(createUserDto);
+    return this.userService.buildUserResponse(user);
   }
 }

@@ -16,4 +16,17 @@ export class UserService {
     console.log('newUser', newUser);
     return await this.userRepository.save(newUser);
   }
+
+  generateJwt(user: UserEntity): string {
+    return 'foo';
+  }
+
+  buildUserResponse(user: UserEntity): any {
+    return {
+      user: {
+        ...user,
+        token: this.generateJwt(user),
+      },
+    };
+  }
 }
