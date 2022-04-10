@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserEntity } from './user.entity';
 import { sign } from 'jsonwebtoken';
+import { JWT_SECRET } from '../config';
 
 @Injectable()
 export class UserService {
@@ -25,7 +26,7 @@ export class UserService {
         username: user.username,
         email: user.email,
       },
-      'foo',
+      JWT_SECRET,
     );
   }
 
