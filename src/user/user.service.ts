@@ -19,7 +19,14 @@ export class UserService {
   }
 
   generateJwt(user: UserEntity): string {
-    return 'foo';
+    return sign(
+      {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+      },
+      'foo',
+    );
   }
 
   buildUserResponse(user: UserEntity): any {
