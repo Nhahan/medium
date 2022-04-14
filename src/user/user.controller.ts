@@ -20,4 +20,8 @@ export class UserController {
     const user = await this.userService.createUser(createUserDto);
     return this.userService.buildUserResponse(user);
   }
+
+  @Post('users/login')
+  @UsePipes(new ValidationPipe())
+  async login(@Body('user') loginDto: any) {}
 }
