@@ -5,6 +5,8 @@ import { CreateUserDto } from './dto/createUser.dto';
 import { UserEntity } from './user.entity';
 import { sign } from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
+import { compare } from 'bcrypt';
+import { LoginUserDto } from './dto/loginUser.dto';
 
 @Injectable()
 export class UserService {
@@ -29,6 +31,31 @@ export class UserService {
     Object.assign(newUser, createUserDto);
     console.log('newUser', newUser);
     return await this.userRepository.save(newUser);
+  }
+
+  async login(loginUserDto: LoginUserDto): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({
+      email: loginUserDto.email,
+    });
+    if (!user) {
+      throw new HttpException(
+        'Credentials are not valid',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+
+    const isPasswordCorrect = await compare(
+      loginUserDto.password,
+      user.password,
+    );
+    if (!isPasswordCorrect) {
+      throw new HttpException(
+        'Credentials are not valid',
+        HttpStatus.UNAUTHORIZED,
+      );
+    }
+
+    return user;
   }
 
   generateJwt(user: UserEntity): string {
