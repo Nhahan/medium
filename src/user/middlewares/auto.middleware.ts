@@ -1,13 +1,13 @@
 import { NestMiddleware } from '@nestjs/common';
 import { Response, NextFunction } from 'express';
-import { ExporessRequest } from '../types/expressRequest.interface';
+import { ExpressRequest } from '../types/expressRequest.interface';
 import { verify } from 'jsonwebtoken';
 import { JWT_SECRET } from '@app/config';
 import { UserService } from '../user.service';
 
 export class AuthMiddleware implements NestMiddleware {
   constructor(private readonly userService: UserService) {}
-  async use(req: ExporessRequest, res: Response, next: NextFunction) {
+  async use(req: ExpressRequest, _: Response, next: NextFunction) {
     console.log('AuthMiddleware', req.headers);
     if (!req.headers.authorization) {
       req.user = null;
@@ -26,7 +26,5 @@ export class AuthMiddleware implements NestMiddleware {
       req.user = null;
       next();
     }
-
-    next();
   }
 }
