@@ -1,10 +1,12 @@
-import { ConsoleLogger, NestMiddleware } from '@nestjs/common';
+import { NestMiddleware } from '@nestjs/common';
 import { Response, NextFunction } from 'express';
 import { ExporessRequest } from '../types/expressRequest.interface';
 import { verify } from 'jsonwebtoken';
 import { JWT_SECRET } from '@app/config';
+import { UserService } from '../user.service';
 
 export class AuthMiddleware implements NestMiddleware {
+  constructor(private readonly userService: UserService) {}
   async use(req: ExporessRequest, res: Response, next: NextFunction) {
     console.log('AuthMiddleware', req.headers);
     if (!req.headers.authorization) {
@@ -17,7 +19,8 @@ export class AuthMiddleware implements NestMiddleware {
 
     try {
       const decode = verify(token, JWT_SECRET);
-      console.log('decode', decode);
+      const user = await this.userService.findById(decode.id);
+      req.user = user;
       next();
     } catch (err) {
       req.user = null;
