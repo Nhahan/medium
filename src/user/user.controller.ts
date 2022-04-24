@@ -38,10 +38,8 @@ export class UserController {
 
   @Get('users')
   async currentUser(
-    @Req() request: ExpressRequest,
-    @User() user: UserEntity,
+    @User('id') user: UserEntity,
   ): Promise<UserResponseInterface> {
-    console.log('user', user);
-    return this.userService.buildUserResponse(request.user);
+    return this.userService.buildUserResponse(user);
   }
 }
