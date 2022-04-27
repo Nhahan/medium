@@ -22,10 +22,7 @@ export class UserService {
       username: createUserDto.username,
     });
     if (userByEmail || userByUsername) {
-      throw new HttpException(
-        'Email or username are taken',
-        HttpStatus.UNPROCESSABLE_ENTITY,
-      );
+      throw new HttpException('Email or username are taken', HttpStatus.UNPROCESSABLE_ENTITY);
     }
     const newUser = new UserEntity();
     Object.assign(newUser, createUserDto);
@@ -45,21 +42,12 @@ export class UserService {
       { select: ['id', 'username', 'email', 'bio', 'image', 'password'] },
     );
     if (!user) {
-      throw new HttpException(
-        'Credentials are not valid',
-        HttpStatus.UNPROCESSABLE_ENTITY,
-      );
+      throw new HttpException('Credentials are not valid', HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    const isPasswordCorrect = await compare(
-      loginUserDto.password,
-      user.password,
-    );
+    const isPasswordCorrect = await compare(loginUserDto.password, user.password);
     if (!isPasswordCorrect) {
-      throw new HttpException(
-        'Credentials are not valid',
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw new HttpException('Credentials are not valid', HttpStatus.UNAUTHORIZED);
     }
 
     delete user.password;
