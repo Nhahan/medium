@@ -37,7 +37,7 @@ export class UserController {
     @User('id') currentUserId: number,
     @Body('user') updateUserDto: UpdateUserDto,
   ): Promise<UserResponseInterface> {
-    const user = await this.userService.updateUser(id, updateUserDto);
+    const user = await this.userService.updateUser(currentUserId, updateUserDto);
     return this.userService.buildUserResponse(user);
   }
 }
