@@ -4,5 +4,6 @@ import { Module } from '@nestjs/common';
   imports: [TypeOrmModule.forFeature([ArticleEntity])],
   controllers: [ArticleController],
   providers: [ArticleService, AuthGuard],
+  exports: [ArticleService],
 })
 export class UserModule {}
