@@ -3,9 +3,9 @@ import { ArticleService } from './article.service';
 
 @Controller('article')
 export class ArticleController {
-  constructor(private readonly articlesService: ArticleService) {}
+  constructor(private readonly articleService: ArticleService) {}
   @Post()
   async create() {
-    return 'Create Article';
+    return this.articleService.createArticle();
   }
 }
