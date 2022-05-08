@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'articles' })
 export class ArticleEntity {
@@ -28,4 +28,9 @@ export class ArticleEntity {
 
   @Column({ default: 0 })
   favoritesCount: number;
+
+  @BeforeUpdate()
+  updateTimestamp() {
+    this.updatedAt = new Date();
+  }
 }
