@@ -7,7 +7,6 @@ import { sign } from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
 import { compare } from 'bcrypt';
 import { LoginUserDto } from './dto/loginUser.dto';
-import { NodeCompatibleEventEmitter } from 'rxjs/internal/observable/fromEvent';
 import { UpdateUserDto } from './dto/updateuser.dto';
 
 @Injectable()
