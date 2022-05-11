@@ -9,7 +9,7 @@ export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
   @Post()
   @UseGuards(AuthGuard)
-  async create(@User('id') currentUserId: number, @Body('article') createArticleDto: CreateArticleDto) {
+  async create(@User('id') currentUserId: number, @Body('article') createArticleDto: CreateArticleDto): Promise<any> {
     return this.articleService.createArticle();
   }
 }
