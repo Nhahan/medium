@@ -10,6 +10,6 @@ export class ArticleController {
   @Post()
   @UseGuards(AuthGuard)
   async create(@User('id') currentUserId: number, @Body('article') createArticleDto: CreateArticleDto): Promise<any> {
-    return this.articleService.createArticle();
+    return await this.articleService.createArticle(currentUserId, createArticleDto);
   }
 }
