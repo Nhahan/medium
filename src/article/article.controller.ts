@@ -1,5 +1,6 @@
 import { User } from '@app/user/decorators/user.decorator';
 import { AuthGuard } from '@app/user/guards/auth.guard';
+import { UserEntity } from '@app/user/user.entity';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/createArticle.dto';
@@ -9,7 +10,7 @@ export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
   @Post()
   @UseGuards(AuthGuard)
-  async create(@User('id') currentUserId: number, @Body('article') createArticleDto: CreateArticleDto): Promise<any> {
-    return await this.articleService.createArticle(currentUserId, createArticleDto);
+  async create(@User('id') currentUser: UserEntity, @Body('article') createArticleDto: CreateArticleDto): Promise<any> {
+    return await this.articleService.createArticle(currentUser, createArticleDto);
   }
 }
