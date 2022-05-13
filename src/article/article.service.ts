@@ -17,5 +17,9 @@ export class ArticleService {
     if (!article.tagList) {
       article.tagList = [];
     }
+
+    article.author = currentUser;
+
+    return await this.articleRepository.save(article);
   }
 }
