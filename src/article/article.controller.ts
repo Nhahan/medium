@@ -11,6 +11,8 @@ export class ArticleController {
   @Post()
   @UseGuards(AuthGuard)
   async create(@User('id') currentUser: UserEntity, @Body('article') createArticleDto: CreateArticleDto): Promise<any> {
-    return await this.articleService.createArticle(currentUser, createArticleDto);
+    const article = await this.articleService.createArticle(currentUser, createArticleDto);
+
+    return this.articleService.buildArticleResponse(article);
   }
 }
