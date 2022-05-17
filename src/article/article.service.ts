@@ -24,4 +24,6 @@ export class ArticleService {
 
     return await this.articleRepository.save(article);
   }
+
+  buildArticleResponse(article: ArticleEntity): ArticelResponseInterface {}
 }
