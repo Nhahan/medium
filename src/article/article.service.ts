@@ -30,8 +30,12 @@ export class ArticleService {
   buildArticleResponse(article: ArticleEntity): ArticleResponseInterface {}
 
   private getSlug(title: string): string {
-    return slugify(title, {
-      lower: true,
-    });
+    return (
+      slugify(title, {
+        lower: true,
+      }) +
+      '-' +
+      ((Math.random() * Math.pow(36, 6)) | 0).toString(36)
+    );
   }
 }
