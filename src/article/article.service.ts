@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { ArticleEntity } from './article.entity';
 import { UserEntity } from '@app/user/user.entity';
 import { CreateArticleDto } from './dto/createArticle.dto';
+import slugify from 'slugify';
+import { ArticleResponseInterface } from './types/articleResponse.interface';
 
 @Injectable()
 export class ArticleService {
@@ -25,5 +27,11 @@ export class ArticleService {
     return await this.articleRepository.save(article);
   }
 
-  buildArticleResponse(article: ArticleEntity): ArticelResponseInterface {}
+  buildArticleResponse(article: ArticleEntity): ArticleResponseInterface {}
+
+  private getSlug(title: string): string {
+    return slugify(title, {
+      lower: true,
+    });
+  }
 }
