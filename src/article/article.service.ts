@@ -20,7 +20,7 @@ export class ArticleService {
       article.tagList = [];
     }
 
-    article.slug = 'foo';
+    article.slug = this.getSlug(createArticleDto.title);
 
     article.author = currentUser;
 
