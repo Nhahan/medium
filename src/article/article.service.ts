@@ -27,7 +27,9 @@ export class ArticleService {
     return await this.articleRepository.save(article);
   }
 
-  buildArticleResponse(article: ArticleEntity): ArticleResponseInterface {}
+  buildArticleResponse(article: ArticleEntity): ArticleResponseInterface {
+    return { article };
+  }
 
   private getSlug(title: string): string {
     return (
