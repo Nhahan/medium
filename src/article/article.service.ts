@@ -34,7 +34,7 @@ export class ArticleService {
       throw new HttpException('Article does not exits', HttpStatus.NOT_FOUND);
     }
 
-    if (article.author.id !== currentUserId) {
+    if ((await article).author.id !== currentUserId) {
       throw new HttpException('You are not an author', HttpStatus.FORBIDDEN);
     }
 
