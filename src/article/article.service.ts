@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ArticleEntity } from './article.entity';
@@ -25,6 +25,14 @@ export class ArticleService {
     article.author = currentUser;
 
     return await this.articleRepository.save(article);
+  }
+
+  async deleteArticle(slug: string, currentUserId): Promise<DeleteResult> {
+    const article = this.findBySlug(slug);
+
+    if (!article) {
+      throw new HttpException('Article does not exits', HttpException.NOT_FOUND);
+    }
   }
 
   async findBySlug(slug: string): Promise<ArticleEntity> {
